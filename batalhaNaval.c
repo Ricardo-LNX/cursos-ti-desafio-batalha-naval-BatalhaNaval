@@ -36,15 +36,39 @@ int main() {
         return 1;
     }
 
+    // 4. Verificar se o navio vertical cabe e não se sobrepõe
+    if (linha_vertical + NAVIO <= TAM) {
+        int sobreposicao = 0;
+        for (i = linha_vertical; i < linha_vertical + NAVIO; i++) {
+            if (tabuleiro[i][coluna_vertical] == NAVIO_VALOR) {
+                sobreposicao = 1;
+                break;
+            }
+        }
+        if (sobreposicao) {
+            printf("Erro: os navios se sobrepõem!\n");
+            return 1;
+        } else {
+            for (i = linha_vertical; i < linha_vertical + NAVIO; i++) {
+                tabuleiro[i][coluna_vertical] = NAVIO_VALOR;
+            }
+        }
+    } else {
+        printf("Erro: o navio vertical excede os limites do tabuleiro.\n");
+        return 1;
+    }
 
+    // 5. Exibir o tabuleiro
+    printf("\n=== TABULEIRO DE BATALHA NAVAL ===\n\n");
+    for (i = 0; i < TAM; i++) {
+        for (j = 0; j < TAM; j++) {
+            printf("%d ", tabuleiro[i][j]);
+        }
+        printf("\n");
+    }
 
-
-
-
-
-
-
-
+    return 0;
+}    
     // Nível Novato - Posicionamento dos Navios
     // Sugestão: Declare uma matriz bidimensional para representar o tabuleiro (Ex: int tabuleiro[5][5];).
     // Sugestão: Posicione dois navios no tabuleiro, um verticalmente e outro horizontalmente.
@@ -76,5 +100,4 @@ int main() {
     // 1 1 1 1 1
     // 0 0 1 0 0
 
-    return 0;
-}
+
