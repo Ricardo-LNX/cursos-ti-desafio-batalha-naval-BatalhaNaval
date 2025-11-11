@@ -5,8 +5,21 @@
 
 #define TAM 10        // Tamanho do tabuleiro
 #define NAVIO 3       // Tamanho de cada navio
-#define AGUA 0
-#define NAVIO_VALOR 3
+#define AGUA 0        // Valor que representa a água 
+#define NAVIO_VALOR 3  //Tamanhofixo dos navios
+
+// Função para inicializar o tabuleiro com zeros (água)
+void inicializarTabuleiro(int tabuleiro[TAM][TAM]) {
+    for (int i = 0; i < TAM; i++) {
+        for (int j = 0; j < TAM; j++) {
+            tabuleiro[i][j] = AGUA;
+        }
+    }
+}
+
+
+
+
 
 int main() {
     int tabuleiro[TAM][TAM];
