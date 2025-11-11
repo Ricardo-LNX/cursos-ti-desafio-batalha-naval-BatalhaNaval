@@ -33,6 +33,32 @@ int posicaoValida(int linha, int coluna, int orientacao, int diagonal) {
 }
 
 
+// Função para verificar sobreposição de navios
+int sobrepoeNavio(int tabuleiro[TAM][TAM], int linha, int coluna, int orientacao, int diagonal) {
+    for (int i = 0; i < TAMANHO_NAVIO; i++) {
+        int r = linha, c = coluna;
+
+        if (diagonal == 0) { // Navio reto
+            if (orientacao == 0) c += i;  // horizontal
+            else r += i;                 // vertical
+        } else if (diagonal == 1) {      // diagonal principal (↘)
+            r += i;
+            c += i;
+        } else if (diagonal == 2) {      // diagonal inversa (↙)
+            r += i;
+            c -= i;
+        }
+
+        if (tabuleiro[r][c] == NAVIO) return 1; // sobreposição
+    }
+    return 0;
+}
+
+
+
+
+
+
 
 int main() {
     int tabuleiro[TAM][TAM];
