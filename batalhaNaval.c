@@ -1,12 +1,12 @@
+// Desafio Batalha Naval - MateCheck
+// Este código inicial serve como base para o desenvolvimento do sistema de Batalha Naval.
+// Siga os comentários para implementar cada parte do desafio.
 #include <stdio.h>
 
 #define TAM 10        // Tamanho do tabuleiro
 #define NAVIO 3       // Tamanho de cada navio
 #define AGUA 0
 #define NAVIO_VALOR 3
-// Desafio Batalha Naval - MateCheck
-// Este código inicial serve como base para o desenvolvimento do sistema de Batalha Naval.
-// Siga os comentários para implementar cada parte do desafio.
 
 int main() {
     int tabuleiro[TAM][TAM];
@@ -25,6 +25,23 @@ int main() {
     int coluna_horizontal = 4;
     int linha_vertical = 6;
     int coluna_vertical = 1;    
+
+    // 3. Verificar se o navio horizontal cabe no tabuleiro
+    if (coluna_horizontal + NAVIO <= TAM) {
+        for (j = coluna_horizontal; j < coluna_horizontal + NAVIO; j++) {
+            tabuleiro[linha_horizontal][j] = NAVIO_VALOR;
+        }
+    } else {
+        printf("Erro: o navio horizontal excede os limites do tabuleiro.\n");
+        return 1;
+    }
+
+
+
+
+
+
+
 
 
 
