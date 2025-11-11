@@ -17,7 +17,20 @@ void inicializarTabuleiro(int tabuleiro[TAM][TAM]) {
     }
 }
 
-
+// Função para verificar se o navio cabe no tabuleiro (sem sair dos limites)
+int posicaoValida(int linha, int coluna, int orientacao, int diagonal) {
+    // orientacao: 0 = horizontal, 1 = vertical
+    // diagonal: 0 = não, 1 = diagonal principal, 2 = diagonal inversa
+    if (diagonal == 0) {
+        if (orientacao == 0 && coluna + TAMANHO_NAVIO <= TAM) return 1; // horizontal
+        if (orientacao == 1 && linha + TAMANHO_NAVIO <= TAM) return 1;  // vertical
+    } else if (diagonal == 1) { // diagonal principal (↘)
+        if (linha + TAMANHO_NAVIO <= TAM && coluna + TAMANHO_NAVIO <= TAM) return 1;
+    } else if (diagonal == 2) { // diagonal inversa (↙)
+        if (linha + TAMANHO_NAVIO <= TAM && coluna - (TAMANHO_NAVIO - 1) >= 0) return 1;
+    }
+    return 0;
+}
 
 
 
