@@ -1,10 +1,33 @@
 #include <stdio.h>
 
+#define TAM 10        // Tamanho do tabuleiro
+#define NAVIO 3       // Tamanho de cada navio
+#define AGUA 0
+#define NAVIO_VALOR 3
 // Desafio Batalha Naval - MateCheck
 // Este código inicial serve como base para o desenvolvimento do sistema de Batalha Naval.
 // Siga os comentários para implementar cada parte do desafio.
 
 int main() {
+    int tabuleiro[TAM][TAM];
+    int i, j;
+
+    // 1. Inicializar o tabuleiro com água (0)
+    for (i = 0; i < TAM; i++) {
+        for (j = 0; j < TAM; j++) {
+            tabuleiro[i][j] = AGUA;
+        }
+    }
+
+    // 2. Definir coordenadas iniciais dos navios
+    // Coordenadas: (linha, coluna)
+    int linha_horizontal = 2;
+    int coluna_horizontal = 4;
+    int linha_vertical = 6;
+    int coluna_vertical = 1;    
+
+
+
     // Nível Novato - Posicionamento dos Navios
     // Sugestão: Declare uma matriz bidimensional para representar o tabuleiro (Ex: int tabuleiro[5][5];).
     // Sugestão: Posicione dois navios no tabuleiro, um verticalmente e outro horizontalmente.
