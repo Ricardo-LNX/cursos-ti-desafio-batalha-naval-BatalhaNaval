@@ -116,6 +116,104 @@ int main() {
         }
     }
 
+        // ---------- CRIAÇÃO DINÂMICA DAS MATRIZES DE HABILIDADE (5x5) ----------
+    int cone[H][H];    // cone apontando para baixo (topo no topo do 5x5)
+    int cruz[H][H];    // cruz com centro no centro do 5x5
+    int octaedro[H][H];// "losango" (diamante) com centro no centro do 5x5
+
+    // Construção do CONE (topo no topo, se expande para baixo)
+    // Regra usada: para linhas r = 0..H-1
+    // definimos um "comprimento útil" do cone; usaremos as 3 primeiras linhas (r=0..2)
+    for (int r = 0; r < H; r++) {
+        for (int c = 0; c < H; c++) {
+            // inicializa com 0
+            cone[r][c] = 0;
+
+            // Para as 3 primeiras linhas, aplicamos a condição abs(c-centro) <= r
+            // r=0 => só o centro, r=1 => 3 células centrais, r=2 => 5 células (linha cheia)
+            if (r <= 2) {
+                int diff = (c - CENTRO);
+                if (diff < 0) diff = -diff;
+                if (diff <= r) cone[r][c] = 1;
+            }
+        }
+    }
+
+    // Construção da CRUZ
+    for (int r = 0; r < H; r++) {
+        for (int c = 0; c < H; c++) {
+            cruz[r][c] = 0;
+            // cruz = toda a linha central e toda a coluna central
+            if (r == CENTRO || c == CENTRO) cruz[r][c] = 1;
+        }
+    }
+
+    // Construção do "OCTAEDRO" (vista frontal -> losango/diamante)
+    // Usaremos a condição de distância de Manhattan <= 1 (raio = 1) para obter o padrão pedido
+    for (int r = 0; r < H; r++) {
+        for (int c = 0; c < H; c++) {
+            octaedro[r][c] = 0;
+            int manhattan = ( (r > CENTRO ? r - CENTRO : CENTRO - r) +
+                              (c > CENTRO ? c - CENTRO : CENTRO - c) );
+            if (manhattan <= 1) octaedro[r][c] = 1;
+        }
+    }
+
+    // ---------- PONTOS DE ORIGEM (centro) PARA CADA HABILIDADE NO TABULEIRO ----------
+    // Valores definidos diretamente no código (linha, coluna)
+    int origemConeLinha = 1, origemConeColuna = 4;     // o topo do cone ficará centrado aqui
+    int origemCruzLinha = 6, origemCruzColuna = 2;
+    int origemOctLinha = 7, origemOctColuna = 7;
+
+    // ---------- SOBRESCREVER O TABULEIRO COM ÁREA DE HABILIDADE (marcar com 5) ----------
+    // Repare: não sobrescrevemos navios (3). Se uma célula já contiene NAVIO, mantemos NAVIO.
+    // Utilizamos loops aninhados para sobrepor centralizando HxH em cada origem.
+    int dr, dc;
+    // Função inline: aplicar uma matriz HxH sobre tabuleiro, centrando em (origLinha, origCol)
+    // se valor da matriz == 1 e célula do tabuleiro == AGUA -> marca como AREA_HABILIDADE
+    // Validamos limites antes de escrever
+    // Aplicar CONE
+    for (int r = 0; r < H; r++) {
+        for (int c = 0; c < H; c++) {
+            if (cone[r][c] == 1) {
+                // deslocamento do centro da matriz para a célula do tabuleiro
+                dr = origemConeLinha + (r - CENTRO);
+                dc = origemConeColuna + (c - CENTRO);
+                if (dentroLimites(dr, dc)) {
+                    if (tab[dr][dc] == AGUA) tab[dr][dc] = AREA_HABILIDADE;
+                    // se houver NAVIO, mantemos NAVIO (3) para visualização
+                }
+            }
+        }
+    }
+
+    // Aplicar CRUZ
+    for (int r = 0; r < H; r++) {
+        for (int c = 0; c < H; c++) {
+            if (cruz[r][c] == 1) {
+                dr = origemCruzLinha + (r - CENTRO);
+                dc = origemCruzColuna + (c - CENTRO);
+                if (dentroLimites(dr, dc)) {
+                    if (tab[dr][dc] == AGUA) tab[dr][dc] = AREA_HABILIDADE;
+                }
+            }
+        }
+    }
+
+    // Aplicar OCTAEDRO
+    for (int r = 0; r < H; r++) {
+        for (int c = 0; c < H; c++) {
+            if (octaedro[r][c] == 1) {
+                dr = origemOctLinha + (r - CENTRO);
+                dc = origemOctColuna + (c - CENTRO);
+                if (dentroLimites(dr, dc)) {
+                    if (tab[dr][dc] == AGUA) tab[dr][dc] = AREA_HABILIDADE;
+                }
+            }
+        }
+    }    
+
+
 
 
 
