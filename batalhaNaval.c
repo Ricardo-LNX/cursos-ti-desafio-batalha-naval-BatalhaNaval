@@ -69,7 +69,22 @@ void posicionarNavio(int tabuleiro[TAM][TAM], int linha, int coluna, int orienta
 }
 
 
+// Função para exibir o tabuleiro no console
+void exibirTabuleiro(int tabuleiro[TAM][TAM]) {
+    printf("\n=== TABULEIRO BATALHA NAVAL ===\n\n");
+    printf("   ");
+    for (int c = 0; c < TAM; c++) printf("%2d ", c);
+    printf("\n");
 
+    for (int i = 0; i < TAM; i++) {
+        printf("%2d ", i);
+        for (int j = 0; j < TAM; j++) {
+            printf("%2d ", tabuleiro[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
 
 
 int main() {
