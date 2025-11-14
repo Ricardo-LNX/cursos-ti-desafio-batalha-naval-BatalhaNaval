@@ -87,7 +87,34 @@ void exibirTabuleiro(int tab[TAM][TAM]) {
     printf("\n");
 }
 
+int main() {
+    int tab[TAM][TAM];
+    inicializarTabuleiro(tab);
 
+    // ---------- POSICIONAMENTO DE NAVIOS (4 navios) ----------
+    // Cada navio: {linha, coluna, orientacao, diagonal}
+    // orientacao: 0=horizontal,1=vertical
+    // diagonal: 0=reto (usar orientacao), 1=diagonal principal(↘), 2=diagonal inversa(↙)
+    int navios[4][4] = {
+        {2, 1, 0, 0},  // navio 1: linha2,col1 horizontal
+        {5, 6, 1, 0},  // navio 2: linha5,col6 vertical
+        {0, 0, 0, 1},  // navio 3: diagonal principal a partir de (0,0)
+        {3, 9, 0, 2}   // navio 4: diagonal inversa a partir de (3,9)
+    };
+
+    // validar e posicionar navios
+    for (int i = 0; i < 4; i++) {
+        int linha = navios[i][0];
+        int coluna = navios[i][1];
+        int orient = navios[i][2];
+        int diag = navios[i][3];
+
+        if (sobrepoeNavio(tab, linha, coluna, orient, diag)) {
+            printf("Aviso: navio %d inválido (fora ou sobrepoe). Pulando posicionamento.\n", i+1);
+        } else {
+            posicionarNavio(tab, linha, coluna, orient, diag);
+        }
+    }
 
 
 
