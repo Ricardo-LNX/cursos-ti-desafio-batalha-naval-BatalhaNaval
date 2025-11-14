@@ -211,7 +211,31 @@ int main() {
                 }
             }
         }
-    }    
+    }
+    
+    // ---------- EXIBIÇÃO: imprimimos tabuleiro com legenda ----------
+    exibirTabuleiro(tab);
+    printf("Legenda: 0 = água, 3 = navio, 5 = área de habilidade\n\n");
+
+    // Opcional: mostrar as matrizes de habilidade impressas (para ver como foram geradas)
+    printf("Matriz - CONE (1=afetado,0=não):\n");
+    for (int r = 0; r < H; r++) {
+        for (int c = 0; c < H; c++) printf("%d ", cone[r][c]);
+        printf("\n");
+    }
+    printf("\nMatriz - CRUZ (1=afetado,0=não):\n");
+    for (int r = 0; r < H; r++) {
+        for (int c = 0; c < H; c++) printf("%d ", cruz[r][c]);
+        printf("\n");
+    }
+    printf("\nMatriz - OCTAEDRO (1=afetado,0=não):\n");
+    for (int r = 0; r < H; r++) {
+        for (int c = 0; c < H; c++) printf("%d ", octaedro[r][c]);
+        printf("\n");
+    }
+
+    return 0;
+}
 
 
 
