@@ -19,6 +19,32 @@ void inicializarTabuleiro(int tab[TAM][TAM]) {
             tab[i][j] = AGUA;
 }
 
+// Função que verifica se uma posição está dentro do tabuleiro
+int dentroLimites(int linha, int coluna) {
+    return (linha >= 0 && linha < TAM && coluna >= 0 && coluna < TAM);
+}
+
+// Posiciona navio reto (orientacao 0 = horizontal, 1 = vertical) ou diagonal (diagonal = 1 principal, 2 inversa)
+// Supõe que já foi verificado que cabe e não sobrepõe (simplificação).
+void posicionarNavio(int tab[TAM][TAM], int linha, int coluna, int orientacao, int diagonal) {
+    for (int k = 0; k < TAM_NAVIO; k++) {
+        int r = linha;
+        int c = coluna;
+        if (diagonal == 0) {
+            if (orientacao == 0) c = coluna + k;   // horizontal → move coluna
+            else r = linha + k;                   // vertical → move linha
+        } else if (diagonal == 1) { // diagonal principal ↘
+            r = linha + k;
+            c = coluna + k;
+        } else { // diagonal inversa ↙
+            r = linha + k;
+            c = coluna - k;
+        }
+
+        if (dentroLimites(r,c)) tab[r][c] = NAVIO;
+    }
+}
+
 
 
 
