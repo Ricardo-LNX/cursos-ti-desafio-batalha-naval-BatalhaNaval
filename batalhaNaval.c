@@ -1,6 +1,46 @@
 // Desafio Batalha Naval - MateCheck
 // Este código inicial serve como base para o desenvolvimento do sistema de Batalha Naval.
 // Siga os comentários para implementar cada parte do desafio.
+
+#include <stdio.h>
+
+#define TAM 10            // tamanho do tabuleiro (10x10)
+#define AGUA 0
+#define NAVIO 3
+#define AREA_HABILIDADE 5
+#define H 5               // dimensão das matrizes de habilidade (5x5)
+#define CENTRO (H/2)      // índice do centro (2 para H=5)
+#define TAM_NAVIO 3       // tamanho fixo dos navios
+
+// Função para inicializar o tabuleiro com água (zeros)
+void inicializarTabuleiro(int tab[TAM][TAM]) {
+    for (int i = 0; i < TAM; i++)
+        for (int j = 0; j < TAM; j++)
+            tab[i][j] = AGUA;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #include <stdio.h>
 
 #define TAM 10        // Tamanho do tabuleiro
