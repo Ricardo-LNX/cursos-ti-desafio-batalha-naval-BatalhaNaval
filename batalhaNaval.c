@@ -66,6 +66,27 @@ int sobrepoeNavio(int tab[TAM][TAM], int linha, int coluna, int orientacao, int 
     return 0; // não sobrepõe
 }
 
+// Exibe o tabuleiro com índices de linha/coluna
+void exibirTabuleiro(int tab[TAM][TAM]) {
+    printf("\n=== TABULEIRO (0=água, 3=navio, 5=área habilidade) ===\n\n");
+    printf("    ");
+    for (int c = 0; c < TAM; c++) printf("%2d ", c);
+    printf("\n");
+    printf("   +");
+    for (int c = 0; c < TAM; c++) printf("---");
+    printf("\n");
+
+    for (int r = 0; r < TAM; r++) {
+        printf("%2d |", r);
+        for (int c = 0; c < TAM; c++) {
+            // imprimimos os números (0,3,5) com espaçamento
+            printf(" %d ", tab[r][c]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+
 
 
 
