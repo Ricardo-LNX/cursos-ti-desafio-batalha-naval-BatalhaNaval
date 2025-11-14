@@ -54,7 +54,19 @@ int sobrepoeNavio(int tabuleiro[TAM][TAM], int linha, int coluna, int orientacao
     return 0;
 }
 
-
+// Função para posicionar um navio no tabuleiro
+void posicionarNavio(int tabuleiro[TAM][TAM], int linha, int coluna, int orientacao, int diagonal) {
+    for (int i = 0; i < TAMANHO_NAVIO; i++) {
+        if (diagonal == 0) { // navio reto
+            if (orientacao == 0) tabuleiro[linha][coluna + i] = NAVIO;  // horizontal
+            else tabuleiro[linha + i][coluna] = NAVIO;                  // vertical
+        } else if (diagonal == 1) { // diagonal principal ↘
+            tabuleiro[linha + i][coluna + i] = NAVIO;
+        } else if (diagonal == 2) { // diagonal inversa ↙
+            tabuleiro[linha + i][coluna - i] = NAVIO;
+        }
+    }
+}
 
 
 
