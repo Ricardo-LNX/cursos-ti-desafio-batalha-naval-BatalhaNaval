@@ -45,6 +45,33 @@ void posicionarNavio(int tab[TAM][TAM], int linha, int coluna, int orientacao, i
     }
 }
 
+// Verifica se um navio vai sobrepor alguma célula já ocupada (NAVIO)
+int sobrepoeNavio(int tab[TAM][TAM], int linha, int coluna, int orientacao, int diagonal) {
+    for (int k = 0; k < TAM_NAVIO; k++) {
+        int r = linha;
+        int c = coluna;
+        if (diagonal == 0) {
+            if (orientacao == 0) c = coluna + k;
+            else r = linha + k;
+        } else if (diagonal == 1) {
+            r = linha + k;
+            c = coluna + k;
+        } else {
+            r = linha + k;
+            c = coluna - k;
+        }
+        if (!dentroLimites(r,c)) return 1;      // considera inválido (fora) como sobreposição/erro
+        if (tab[r][c] == NAVIO) return 1;      // sobrepõe
+    }
+    return 0; // não sobrepõe
+}
+
+
+
+
+
+
+
 
 
 
